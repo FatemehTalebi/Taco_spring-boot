@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Taco Cloud</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+    .img-fluid {
+        max-width: 100%; /* Adjust this value as needed */
+        height: 200px;
+    }
+</style>
+    
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+        <a class="navbar-brand" href="#">Taco Cloud</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Contact</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Content -->
+<div class="container mt-4">
+    <h1>Welcome to Taco Cloud</h1>
+    <img class="img-fluid" th:src="@{/images/TacoCloud.png}"/>
+
+    <form th:action="@{/menu}" method="POST" th:object="${taco}">
+
+        <h3>Designate your wrap:</h3>
+        <div th:each="ingredient : ${ingredients}" th:if="${ingredient.type == 'WRAP'}">
+            <input th:field="*{ingredients}" type="checkbox" th:value="${ingredient.id}"/>
+            <span th:text="${ingredient.name}">INGREDIENT</span><br/>
+        </div>
+
+        
+           
+                <h3>choose your cheese:</h3>
+                <div th:each="ingredient : ${ingredients}" th:if="${ingredient.type == 'CHEESE'}">
+                    <input th:field="*{ingredients}" type="checkbox" th:value="${ingredient.id}"/>
+                    <span th:text="${ingredient.name}">INGREDIENT</span><br/>
+                </div>
+            
+            
+                <h3>select your sauce:</h3>
+                <div th:each="ingredient : ${ingredients}" th:if="${ingredient.type == 'SAUCE'}">
+                    <input th:field="*{ingredients}" type="checkbox" th:value="${ingredient.id}"/>
+                    <span th:text="${ingredient.name}">INGREDIENT</span><br/>
+                </div>
+            
+        
+
+        <h3>pick your protein:</h3>
+        <div th:each="ingredient : ${ingredients}" th:if="${ingredient.type == 'PROTEIN'}">
+            <input th:field="*{ingredients}" type="checkbox" th:value="${ingredient.id}"/>
+            <span th:text="${ingredient.name}">INGREDIENT</span><br/>
+        </div>
+
+        <h3>Determine your veggies:</h3>
+        <div th:each="ingredient : ${ingredients}" th:if="${ingredient.type == 'VEG'}">
+            <input th:field="*{ingredients}" type="checkbox" th:value="${ingredient.id}"/>
+            <span th:text="${ingredient.name}">INGREDIENT</span><br/>
+        </div>
+		<br/>
+        <div>
+            <h6>Name your taco creation:</h6>
+            <input type="text" th:field="*{name}"/>
+            <br><br><br>
+            <button class="btn btn-primary">Submit Your Taco</button>
+        </div>
+    </form>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
